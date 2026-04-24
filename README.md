@@ -1,152 +1,84 @@
 # Design & Decision Record (DDR)
-**GreenField Technologies | IoT Systems Design**
-
-**Team Members:**
-1. ____________________
-2. ____________________
-
----
+GreenField Technologies | IoT Systems Design
 
 ## 1. System Overview
 
-*   **System Type:** [ ] Component (Lab 1-2) | [ ] System (Lab 3-6) | [ ] Environment (Lab 7-8)
-*   **Description:**
+- System Type: Component
+
+- Description:
+ESP32-C6 con radio IEEE 802.15.4 usado para medir RSSI y PER.
+El alcance confiable obtenido fue aproximadamente 10 m.
 
 ---
 
-## 2. Lab Log & Stakeholder Summaries
+## 2. Lab 1: RF Characterization
 
-### Lab 1: RF Characterization
-*   **To Samuel (Architect):**
-*   **To Edwin (Ops):**
+### To Samuel (Architect)
+Se midió RSSI y PER a diferentes distancias.
+El RSSI disminuye desde -40 dBm (1 m) hasta -96 dBm (30 m).
+La pérdida de paquetes empieza a ser significativa (>1%) a partir de 10 m.
 
-### Lab 2: 6LoWPAN
-*   **To Samuel:**
-
-### Lab 3: Thread & CoAP
-*   **To Daniela (Customer):**
-
-### Lab 4: Sensors & Control
-*   **To Edwin:**
-
-### Lab 5: Border Router
-*   **To Daniela:**
-
-### Lab 6: Security
-*   **To Edward (Security):**
-
-### Lab 7: Dashboard
-*   **To Gustavo (Product):**
-
-### Lab 8: Final Integration
-*   **To All:**
+### To Edwin (Operations)
+El sistema funciona bien hasta 5–10 m.
+Después de esa distancia, la señal baja y se pierden mensajes.
+Se recomienda instalar los dispositivos a menos de 10 m.
 
 ---
 
-## 3. Architecture Decision Records (ADRs)
+## 3. ADR-001: Channel Selection
 
-**ADR-___: [Title]**
-*   **Context:**
-*   **Decision:**
-*   **Rationale:**
-*   **Status:** [ ] Proposed | [ ] Accepted | [ ] Deprecated
+- Context:
+Se realizó un escaneo de energía en los canales.
 
----
+- Decision:
+Se seleccionó el canal 22.
 
-## 4. ISO/IEC 30141 Mapping
+- Rationale:
+Presenta menor ruido (~ -106 dBm), lo que mejora la comunicación.
 
-### Domain Mapping
-
-| Component | ISO Domain | Justification |
-|-----------|------------|---------------|
-|           |            |               |
-
-### Component Capabilities
-
-| Capability Category | Subcategory | Component/Feature | Active/Latent | Lab Introduced |
-|---------------------|-------------|-------------------|---------------|----------------|
-|                     |             |                   |               |                |
+- Status: Accepted
 
 ---
 
-## 5. First Principles Reflections
+## 4. ISO Mapping
 
-**Lab 1:**
-1.
-2.
-
-**Lab 2:**
-1.
-
-...
+| Component | Domain |
+|----------|--------|
+| ESP32-C6 | SCD |
+| Radio 802.15.4 | SCD |
+| Antena | PED |
+| Aire | PED |
 
 ---
 
-## 6. Performance Baselines
+## 5. First Principles
 
-| Metric | Target | Measured | Status |
-|--------|--------|----------|--------|
-| Lab 1: Max Range | > 20m | ___ m | [ ] Pass |
-| Lab 2: Healing Time | < 120s | ___ s | [ ] Pass |
-| Lab 3: CoAP Latency | < 200ms| ___ ms | [ ] Pass |
-| Lab 4: Poll Latency | < 5s | ___ s | [ ] Pass |
-| Lab 6: DTLS Time | < 3s | ___ s | [ ] Pass |
+1. La señal disminuye con la distancia.
+2. A partir de ~ -90 dBm la comunicación falla.
 
 ---
 
-## 7. Ethics & Sustainability Checklist
+## 6. Performance
 
-*   [ ] **Lab 1:** Verified interference doesn't disrupt neighbors.
-*   [ ] **Lab 4:** Data collection minimized (Privacy).
-*   [ ] **Lab 5:** System works locally without cloud (Sustainability).
-*   [ ] **Lab 6:** Encryption enabled (Privacy).
-*   [ ] **Lab 8:** End-of-Life plan considered.
+| Metric | Target | Measured |
+|--------|--------|----------|
+| Max Range | >20 m | 10 m |
 
 ---
 
-## 8. Viewpoint Analysis
+## 7. Results Table
 
-| Viewpoint | Labs Addressed | Key Concerns Documented |
-|-----------|----------------|-------------------------|
-| Foundational |            |                         |
-| Business |               |                         |
-| Usage |                  |                         |
-| Functional |             |                         |
-| Trustworthiness |        |                         |
-| Construction |           |                         |
-
----
-
-## 9. Trustworthiness Audit (Lab 6+)
-
-| Characteristic | Addressed? | How | Gaps |
-|----------------|------------|-----|------|
-| Availability |            |     |      |
-| Confidentiality |         |     |      |
-| Integrity |               |     |      |
-| Reliability |             |     |      |
-| Resilience |              |     |      |
-| Safety |                  |     |      |
-| Compliance |              |     |      |
+| Distancia (m) | RSSI A->B | RSSI B->A | PER A->B | PER B->A |
+|--------------|-----------|-----------|----------|----------|
+| 1 | -40 | -51.6 | 0 | 0 |
+| 5 | -64.4 | -74.8 | 0 | 0 |
+| 10 | -90.8 | -85.6 | 2 | 0 |
+| 20 | -92.6 | -87.4 | 2 | 1 |
+| 30 | -96.2 | -89.2 | 9 | 2 |
 
 ---
 
-## 10. Construction Viewpoint - IoT System Pattern (Lab 8)
+## Conclusion
 
-| Pattern Element | Category | Your System |
-|-----------------|----------|-------------|
-| IoT System |            |             |
-| IoT Components |         |             |
-| Digital Network |        |             |
-| IoT Devices |            |             |
-| Primary Capability (observation) | |   |
-| Primary Capability (control) | |       |
-| Secondary Capability (processing) | |  |
-| Secondary Capability (transferring) | | |
-| Secondary Capability (storage) | |     |
-| Interface (network) |    |             |
-| Interface (human UI) |   |             |
-| Interface (application) | |            |
-| Supplemental (security) | |            |
-| Supplemental (orchestration) | |       |
-| Supplemental (management) | |          |
+El RSSI disminuye con la distancia y el PER aumenta.
+El alcance confiable del sistema es aproximadamente 10 m.
