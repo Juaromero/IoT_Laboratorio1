@@ -1,6 +1,12 @@
 # Design & Decision Record (DDR)
 GreenField Technologies | IoT Systems Design
 
+**Team Members:**
+1. Mateo Alexander Cárdenas Cuesta
+2. Juan David Romero Calderón
+
+---
+
 ## 1. System Overview
 
 - System Type: Component
