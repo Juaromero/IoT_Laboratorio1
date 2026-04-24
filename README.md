@@ -1,4 +1,4 @@
-# Design & Decision Record (DDR)
+# Design & Decision Record (DDR) / Entregable 1
 GreenField Technologies | IoT Systems Design
 
 **Team Members:**
@@ -90,7 +90,7 @@ El RSSI disminuye con la distancia y el PER aumenta.
 El alcance confiable del sistema es aproximadamente 10 m.
 
 
-# GreenField SoilSense - Informe de desempeño del Laboratorio 1
+# GreenField SoilSense - Informe de desempeño del Laboratorio 1 / Entregable 2
 
 ## Objetivo
 Probar si la radio ESP32-C6 funciona para redes de sensores agrícolas
