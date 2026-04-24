@@ -130,3 +130,34 @@ Coste estimado de hardware:
 - El alcance es limitado (≈10 m), lo que incrementa el número de nodos  
 - Se debe evaluar rendimiento en condiciones reales (vegetación, humedad)  
 - Posible necesidad de red mesh para cubrir áreas grandes
+
+
+# Despliegue de campo SoilSense - Lista de verificación RF / Entregable 3
+
+## Síntoma: El dispositivo no se conecta a la red
+
+- Verificar que ambos dispositivos estén en el mismo canal:
+  comando: ot dataset channel
+- Revisar que la antena esté bien conectada (evitar conectores flojos)
+- Confirmar que no haya obstrucciones metálicas cercanas (silos, estructuras, etc.)
+- Reiniciar la red si es necesario:
+  comando: ot thread start
+
+---
+
+## Síntoma: Pérdida intermitente de paquetes
+
+- Verificar RSSI:
+  debe ser > -70 dBm para comunicación estable
+- Escanear interferencia:
+  comando: ot scan energy 500
+- Reducir la distancia entre nodos si hay vegetación
+- Cambiar de canal si se detecta interferencia WiFi
+
+---
+
+## Directrices para el alcance máximo
+
+- Línea de visión: 10 m  
+- A través de vegetación ligera: 8 m  
+- A través de cultivos densos: 5 m (reducir espaciamiento entre nodos)
