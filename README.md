@@ -88,3 +88,45 @@ Presenta menor ruido (~ -106 dBm), lo que mejora la comunicación.
 
 El RSSI disminuye con la distancia y el PER aumenta.
 El alcance confiable del sistema es aproximadamente 10 m.
+
+
+# GreenField SoilSense - Informe de desempeño del Laboratorio 1
+
+## Objetivo
+Probar si la radio ESP32-C6 funciona para redes de sensores agrícolas
+
+---
+
+## Hallazgos clave
+
+✅ Rango máximo fiable: 10 m  
+(pérdida de paquetes < 1% cuando RSSI > -90 dBm)
+
+✅ Espaciado recomendado de sensores: 8 m  
+(incluye margen de seguridad para vegetación/obstáculos)
+
+✅ Mejor canal de radio: 802.15.4 Canal 22  
+(menor interferencia: -106 dBm ruido de fondo)
+
+⚠️ Riesgo: Interferencia WiFi detectada en canales 18 y 26  
+(evitar desplegar sensores cerca de estos)
+
+---
+
+## Impacto en el producto
+
+Para un campo agrícola de 10 hectáreas:  
+≈ 1,560 nodos sensores  
+
+Coste estimado de hardware:  
+1,560 nodos × $40/nodo = $62,400  
+
+---
+
+## Recomendación
+
+⚠️ Necesito más pruebas  
+
+- El alcance es limitado (≈10 m), lo que incrementa el número de nodos  
+- Se debe evaluar rendimiento en condiciones reales (vegetación, humedad)  
+- Posible necesidad de red mesh para cubrir áreas grandes
